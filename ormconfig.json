@@ -1,0 +1,17 @@
+{
+    "type": "mysql",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "root",
+    "password": "",
+    "database": "soap",
+    "entities": [
+       "src/app/models/*.ts"
+    ],
+    "migrations": [
+       "src/database/migrations/*.ts"
+    ],
+    "cli": {
+        "migrationsDir": "src/database/migrations"
+    }
+ }

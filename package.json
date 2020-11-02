@@ -1,0 +1,34 @@
+{
+  "name": "ts-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx nodemon --exec ts-node src/index.ts",
+    "typeorm": "npx ts-node ./node_modules/typeorm/cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.8",
+    "nodemon": "^2.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^14.11.2",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "pg": "^8.4.0",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.0",
+    "typeorm": "^0.2.28"
+  }
+}
