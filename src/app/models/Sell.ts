@@ -6,7 +6,7 @@ import {
 import User from './User'
 
 
-@Entity('sells')
+@Entity('sell')
 export default class Sell {
 
     @PrimaryGeneratedColumn('increment')
@@ -28,7 +28,7 @@ export default class Sell {
     sell_icon: string;
 
     @ManyToOne(() => User, (user) => user.sell)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'sell_userId' })
     user: User;
 
 }

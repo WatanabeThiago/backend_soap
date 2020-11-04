@@ -18,7 +18,6 @@ class UserController {
 
         const data = {
             user_name, user_username, user_email, user_password
-
         }
 
         console.log(data)

@@ -5,40 +5,33 @@ import Sell from '../models/Sell'
 
 class SellController {
     async create(req: Request, res: Response) {
-        
+        const SellRepository = getRepository(Sell)
+
+        const { sell_name, sell_price, sell_state, sell_description, sell_icon} = req.body
+        const user_id = req.headers.user_id
+
+        const data = {
+            sell_name, sell_price, sell_state, sell_description, sell_icon, user_id 
+        }
+
+        console.log(data)
+
+        const sell = SellRepository.create(data)
+        await SellRepository.save(sell)
+
+        return res.json(sell);
+
+
     }
     async delete(req: Request, res: Response) {
         
     }
 
     async list(req: Request, res: Response) {
-        try {
-            const courses_all = await getRepository(Sell).find();
-            return res.status(200).json({
-                message: "Sucesso ao buscar todos os usuarios.",
-                data: courses_all,
-            });
-        } catch (error) {
-            return res.status(400).json({
-                message: "Falha ao buscar os usuarios..",
-                info: error,
-            });
-        }
+        
     }
     async listOne(req: Request, res: Response) {
-        const { username } = req.params;
-        try {
-            const user = await getRepository(Sell).findOne(username);
-            return res.status(200).json({
-                message: "Get course operation success.",
-                data: user,
-            });
-        } catch (error) {
-            return res.status(401).json({
-                message: "get courses operation failed, try agaain.",
-                info: error,
-            });
-        }
+        
     }
     async update(req: Request, res: Response) {
         

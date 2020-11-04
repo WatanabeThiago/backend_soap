@@ -49,7 +49,7 @@ export class CreateSellTable1604339584352 implements MigrationInterface {
                   onDelete: 'CASCADE',
                 },
               ],
-        }), true)
+        }))
 
         
     }

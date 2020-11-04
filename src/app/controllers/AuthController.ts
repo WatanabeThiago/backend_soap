@@ -9,9 +9,9 @@ class AuthController {
     async login(req: Request, res: Response) {
         const repository = getRepository(User);
 
-        const { email, password } = req.body;
+        const { user_email, user_password } = req.body;
         console.log(req.body);
-        const user = await repository.findOne({ where: { email } })
+        const user = await repository.findOne({ where: { user_email } })
         
         if(!user)
         {
@@ -19,7 +19,7 @@ class AuthController {
         }
         
         
-        const isValidPassword = await bcrypt.compare(password, user.user_password)
+        const isValidPassword = await bcrypt.compare(user_password, user.user_password)
         console.log("Comparado")
         if(!isValidPassword)
         {
