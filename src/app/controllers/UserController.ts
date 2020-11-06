@@ -2,13 +2,21 @@ import { Request, Response } from 'express'
 import { getRepository, getConnection } from 'typeorm'
 
 import User from '../models/User'
+import UsersView from '../view/UsersView'
 
 class UserController {
     async create(req: Request, res: Response) {
         const UserRepository = getRepository(User);
 
         const { user_name, user_username, user_email, user_password } = req.body;
+            
+        const requestImages = req.files as Express.Multer.File[]
         
+        
+        const images = requestImages.map((image) => {
+            return { path: image.filename }
+        })
+
 
         const userExists = await UserRepository.findOne({ where: { user_email } })
 
@@ -22,7 +30,11 @@ class UserController {
 
         console.log(data)
 
-        const user = UserRepository.create(data)
+        const user = UserRepository.create({
+            ...req.body,
+            images
+        
+        })
         await UserRepository.save(user)
 
         return res.json(user);

@@ -3,9 +3,6 @@ import {
     JoinColumn
 } from 'typeorm'
 
-import User from './User'
-
-
 @Entity('sell')
 export default class Sell {
 
@@ -26,10 +23,20 @@ export default class Sell {
 
     @Column()
     sell_icon: string;
+    
+    @Column()
+    sell_amount: number;
+    
+    @Column()
+    sell_amountSold: number;
+    
+    @Column()
+    sell_AmountAvailable: number;
 
-    @ManyToOne(() => User, (user) => user.sell)
-    @JoinColumn({ name: 'sell_userId' })
-    user: User;
+    @Column()
+    sell_userId: string;
 
+   
+    
 }
 

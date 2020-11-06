@@ -8,24 +8,36 @@ import Sell from '../models/Sell'
 
 class ProfileController {
     async perfil(req: Request, res: Response) {
-        const sell = getRepository(Sell);
-        const user_id_header = req.headers.user_id_header;
+        try {
 
-        console.log(user_id_header)
+            const sell_userId = req.params
+            console.log(sell_userId)
+            const sells = await getRepository(Sell)
+                .find({
+                    where: sell_userId 
+                })
 
-        const sells = await getConnection('sell')
-            .createQueryBuilder()
-            .select("sell_id")
-            .from(User, "user")
-            .where("user_id", { user_id: user_id_header })
-            
-        return res.json(sells)
+
+            console.log(sells)
+
+
+            return res.status(200).json({
+                message: "Sucesso ao buscar todos os Sells.",
+                data: sells,
+            })
+        } catch (error) {
+            return res.status(400).json({
+                message: "Falha ao buscar os Sells..",
+                info: error,
+            });
+        }
+
 
 
     }
+
+
 }
-
-
 
 
 export default new ProfileController();

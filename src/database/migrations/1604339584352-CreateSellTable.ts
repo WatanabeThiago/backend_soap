@@ -29,27 +29,36 @@ export class CreateSellTable1604339584352 implements MigrationInterface {
                 {
                     name: 'sell_description',
                     type: 'varchar',
+                    isNullable: true
                 },
                 {
                     name: "sell_userId",
-                    type: 'integer'
+                    type: 'integer',
+                    isNullable: false
                 },
                 {
                     name: "sell_icon",
                     type: 'varchar'
                 },
-            ],
-            foreignKeys: [
                 {
-                  name: 'SellUser',
-                  columnNames: ['sell_userId'],
-                  referencedTableName: 'user',
-                  referencedColumnNames: ['user_id'],
-                  onUpdate: 'CASCADE',
-                  onDelete: 'CASCADE',
+                    name: "sell_amount",
+                    type: 'integer',
+                    isNullable: false
+
                 },
-              ],
-        }))
+                {
+                    name: "sell_amountSold",
+                    type: 'integer',
+                    default: 0
+                },
+                {
+                    name: "sell_AmountAvailable",
+                    type: 'integer',
+                },
+                
+            ],
+            
+        }), true)
 
         
     }

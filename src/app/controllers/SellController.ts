@@ -3,15 +3,18 @@ import { getRepository, getConnection } from 'typeorm'
 
 import Sell from '../models/Sell'
 
+
 class SellController {
     async create(req: Request, res: Response) {
-        const SellRepository = getRepository(Sell)
+        const SellRepository = getRepository(Sell);
+        const sell_userId = req.headers.authorization
+        const sell_amountSould = 0
+        let { sell_name, sell_price, sell_state, sell_description, sell_icon, sell_amount } = req.body;
+        
+        let sell_AmountAvailable = sell_amount - sell_amountSould
 
-        const { sell_name, sell_price, sell_state, sell_description, sell_icon} = req.body
-        const user_id = req.headers.user_id
-
-        const data = {
-            sell_name, sell_price, sell_state, sell_description, sell_icon, user_id 
+        let data = {
+            sell_name, sell_price, sell_state, sell_description, sell_icon, sell_amount, sell_userId, sell_AmountAvailable, sell_amountSould
         }
 
         console.log(data)

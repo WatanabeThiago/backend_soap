@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, OneToMany, JoinColumn } from 'typeorm'
 import bcrypt from 'bcryptjs'
 
-import Sell from './Sell'
+import Image from './Image'
 
 @Entity('user')
 export default class User {
@@ -21,12 +21,10 @@ export default class User {
     @Column()
     user_password: string;
    
-
-    @OneToMany(() => Sell, (sell) => sell.user, {
-        cascade: ['insert', 'update']
-    })
-    @JoinColumn({name: 'userId'})
-    sell: Sell
+    @OneToMany(() => Image, (image) => image.user, {
+        cascade: ['insert', 'update'],
+      })
+      images: Image[]
 
     @BeforeInsert()
     @BeforeUpdate()
