@@ -21,7 +21,8 @@ router.post('/login', AuthController.login)
 
 router.get('/profile/:sell_userId', ProfileController.perfil)
 
-router.post('/sell', SellController.create)
+router.post('/sell',upload.array('sell_photos'), SellController.create)
+router.get('/sell',upload.array('sell_photos'), SellController.list)
 
 
 

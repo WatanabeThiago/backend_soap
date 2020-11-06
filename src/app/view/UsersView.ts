@@ -14,6 +14,6 @@ export default {
   },
 
   renderMany(users: User[]) {
-    return users.map((orphanage) => this.render(orphanage));
+    return users.map((user) => this.render(user));
   },
 };

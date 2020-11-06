@@ -8,7 +8,7 @@ class UserController {
     async create(req: Request, res: Response) {
         const UserRepository = getRepository(User);
 
-        const { user_name, user_username, user_email, user_password } = req.body;
+        const {user_email } = req.body;
             
         const requestImages = req.files as Express.Multer.File[]
         
@@ -17,18 +17,11 @@ class UserController {
             return { path: image.filename }
         })
 
-
         const userExists = await UserRepository.findOne({ where: { user_email } })
 
         if (userExists) {
             return res.sendStatus(409);
         }
-
-        const data = {
-            user_name, user_username, user_email, user_password
-        }
-
-        console.log(data)
 
         const user = UserRepository.create({
             ...req.body,

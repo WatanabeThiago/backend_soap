@@ -2,6 +2,7 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, BeforeInsert, Be
 import bcrypt from 'bcryptjs'
 
 import Image from './Image'
+import Sell from './Sell'
 
 @Entity('user')
 export default class User {
@@ -11,24 +12,26 @@ export default class User {
 
     @Column()
     user_email: string;
-    
+
     @Column()
     user_name: string;
-   
+
     @Column()
     user_username: string;
 
     @Column()
     user_password: string;
-   
+
     @OneToMany(() => Image, (image) => image.user, {
         cascade: ['insert', 'update'],
-      })
-      images: Image[]
+    })
+    images: Image[]
+
+
 
     @BeforeInsert()
     @BeforeUpdate()
-    hashPassword(){
+    hashPassword() {
         this.user_password = bcrypt.hashSync(this.user_password, 8)
     }
 }

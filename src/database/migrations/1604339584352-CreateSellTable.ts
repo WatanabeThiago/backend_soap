@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateSellTable1604339584352 implements MigrationInterface {
 
@@ -55,12 +55,16 @@ export class CreateSellTable1604339584352 implements MigrationInterface {
                     name: "sell_AmountAvailable",
                     type: 'integer',
                 },
+                {
+                    name: 'user_id',
+                    type: 'integer',
+                  },
                 
             ],
             
         }), true)
 
-        
+
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
