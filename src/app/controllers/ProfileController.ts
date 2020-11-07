@@ -1,30 +1,20 @@
 import { Request, Response } from 'express'
-import { getRepository, getConnection } from 'typeorm'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import { getRepository } from 'typeorm'
 
 import User from '../models/User'
-import Sell from '../models/Sell'
 import UserView from '../view/UsersView'
-
 class ProfileController {
     async perfil(req: Request, res: Response) {
-        
-        const { id } = req.params;
+        const { user_id } = req.params;                             // Recebendo o user_id dos req.params
 
-        const orphanagesRepository = getRepository(User);
+        const userRepository = getRepository(User);                 // Conectando ao repositorio do model User.
     
-        const orphanage = await orphanagesRepository.findOneOrFail(id, {
+        const user = await userRepository.findOneOrFail(user_id, {  // Conectando ao user_id e seus relacionamentos.
           relations: ['images'],
         });
     
-        return res.json(UserView.render(orphanage));
-
-
+        return res.json(UserView.render(user));                      // Retornando os dados em formato JSON de acordo com a view.
     }
-
-
 }
 
-
-export default new ProfileController();
+export default new ProfileController();                             // Exportando a rota de perfil.
