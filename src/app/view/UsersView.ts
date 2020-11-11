@@ -1,5 +1,6 @@
 import User from '../models/User';
 import imagesView from './ImagesView';
+import SellsView from './SellsView';
 
 export default {
   render(user: User) {
@@ -10,6 +11,7 @@ export default {
       email: user.user_email,
       password: user.user_password,
       images: imagesView.renderMany(user.images),
+      sell: SellsView.renderMany(user.sell),
     };
   },
 

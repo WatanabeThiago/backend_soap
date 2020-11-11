@@ -27,6 +27,11 @@ export default class User {
     })
     images: Image[]
 
+    @OneToMany(() => Sell, (sell) => sell.user, {
+        cascade: ['insert', 'update'],
+    })
+    sell: Sell[]
+
 
 
     @BeforeInsert()

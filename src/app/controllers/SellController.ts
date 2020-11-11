@@ -1,17 +1,33 @@
 import { Request, Response } from 'express'
 import { getRepository, getConnection } from 'typeorm'
+import { inject, injectable } from 'tsyringe';
 
 import Sell from '../models/Sell'
 import SellView from '../view/SellsView'
+import User from '../models/User';
+
+interface iUser {
+    user_id: string
+}
+
+@injectable()
 class SellController {
     async create(req: Request, res: Response) {                     // Criar o Sell
         const SellRepository = getRepository(Sell);                 // Conectando ao repositorio do model Sell
-        const sell_userId = req.headers.authorization               // Recebendo o sell_userID dos headers.authorization
+        const UserRepository = getRepository(User); // Conectando ao repositor
+        const user_id = req.headers.authorization               // Recebendo o sell_userID dos headers.authorization
+        const user = UserRepository.findOne({ where: { user_id } })
+        
+        if (user) {
+            console.log('user achado')
+        }
+
+
         const sell_amountSould = 0                                  // Definindo o valor inicial da variavel como 0.
         let { sell_amount } = req.body;                             // Recebendo o sell_amount do req.body           
         let sell_AmountAvailable = sell_amount                      // Definindo o valor de sell_AmountAvailable sendo igual ao sell_amount
-        console.log(...req.body)
-
+  
+        const sell_userId = 1
         const requestImages = req.files as Express.Multer.File[]    // Preparando o Multer para ser usado nas linhas abaixo.
 
         const sell_photos = requestImages.map((image) => {          // Recebento sell_photos do Multer   
@@ -21,6 +37,7 @@ class SellController {
             ...req.body,
             sell_amountSould,
             sell_photos,
+            user_id,
             sell_userId
         })
 
@@ -29,9 +46,11 @@ class SellController {
             sell_AmountAvailable,
             sell_amountSould,
             sell_photos,
+            user_id,
             sell_userId
 
         })
+        console.log('--------')
         await SellRepository.save(sell)                             // Registrando dos dados na linha.
 
         return res.json(sell);                                      // Retornando a sell.
@@ -76,7 +95,12 @@ class SellController {
     async update(req: Request, res: Response) {
         const { sell_name, sell_price, sell_state, sell_description, sell_icon, sell_amount } = req.body;
         console.log(req.body)
-        console.log(...req.body)
+    
+        const requestImages = req.files as Express.Multer.File[]  
+    
+        const sell_photos = requestImages.map((image) => {          // Recebento sell_photos do Multer   
+            return { path: image.filename }                         // Retornando o path em JSON
+        })  
         const dados = {
             sell_name, sell_price, sell_state, sell_description, sell_icon, sell_amount
         }
@@ -84,7 +108,7 @@ class SellController {
         try {
             const courses_update = await getRepository(Sell).update(
                 sell_id,
-                dados
+                dados,
             );
             return res.status(200).json({
                 message: "Update operation success.",
@@ -97,6 +121,11 @@ class SellController {
             });
         }
     }
+
+    async test(req: Request, res: Response){
+        
+    }
+
 
 
 }

@@ -10,7 +10,7 @@ class AuthController {
         const repository = getRepository(User);                                         // Receber o repositório do model User
 
         const { user_email, user_password } = req.body;                                 // Receber dados do front/mobile.
-        console.log(req.body);
+        console.log({ user_email, user_password });
         const user = await repository.findOne({ where: { user_email } })                // Procurar pelo user_email no banco de dados.
         
         if(!user)                                                                       // Verificar se esse email não existe no banco de dados.

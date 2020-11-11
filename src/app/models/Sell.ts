@@ -36,6 +36,11 @@ export default class Sell {
     @Column()
     sell_userId: string;
 
+    @ManyToOne(() => User, (user) => user.sell)
+    @JoinColumn({ name: 'user_id' })
+    user: User;
+
+
     @OneToMany(() => SellPhoto, (sell_photo) => sell_photo.sell, {
         cascade: ['insert', 'update'],
     })

@@ -61,6 +61,16 @@ export class CreateSellTable1604339584352 implements MigrationInterface {
                   },
                 
             ],
+            foreignKeys: [
+                {
+                  name: 'SellUser',
+                  columnNames: ['user_id'],
+                  referencedTableName: 'user',
+                  referencedColumnNames: ['user_id'],
+                  onUpdate: 'CASCADE',
+                  onDelete: 'CASCADE',
+                },
+              ],
             
         }), true)
 
