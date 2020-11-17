@@ -13,7 +13,7 @@ O projeto conta apenas com 2 lados, os 'users' e os 'sells' (vendas/produtos), o
 Existe rotas de CRUD para a tabela 'users' e 'sells'.
 
 # <h3> Teste com o IMSONIA! </h3>
-Na raíz do projeto, existe um arquivo 'imsonia.json', basta importa ele para um workspace no inmsonimia e testar voce mesmo!
+Na raíz do projeto, existe um arquivo 'insomnia.json', basta importa ele para um workspace no inmsonimia e testar voce mesmo!
 # <h3> Requisitos <h3>
  
 1. 📦<i> MySQL<i>
